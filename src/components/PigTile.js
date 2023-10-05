@@ -1,30 +1,45 @@
 import React, {useState} from "react";
 import PigCard from "./PigCard";
+import Filter from "./Filter";
 
 export default function PigTile ({hogs}) {
-    const [isGreased, setisGreased] = useState(false)	
+    const [isGreased, setisGreased] = useState("All")
+    const [isSort, setIsSort] = useState("Name")	
 
-    function handleGreased () {
-        setisGreased(!isGreased)
-        function displayHogs () {
-            const greasedHogs = hogs.filter(pigGreased)
+    function handleGreased (event) {
+        setisGreased(event.target.value)
+    }
     
-            function pigGreased (pig) {
-                return pig.greased === true
-            }
-            return greasedHogs
+    function sortNameWeight (event) {
+        setIsSort(event.target.value)
+    } 
+
+    const sortedHogsgreasedHogs = hogs.filter(pigGreased)
+
+    function pigGreased (pig) {
+        if (isGreased === "All") {
+            return true
+        }else if (isGreased === "Greased"){
+            return pig.greased 
+        }else{
+            return !pig.greased
         }
-        return displayHogs
     }
 
-   
+    const sortedHogs = sortedHogsgreasedHogs.sort((hog1, hog2) => {
+        if (isSort === "Weight"){
+            return hog1.weight - hog2.weight
+        }else {
+            return hog1.name.localeCompare(hog2.name)
+        }
+    })
+    
 return (
     <div className="porkers">
-        <label>Greased?</label>
-		<input type="checkbox" onClick={handleGreased}/>
-        {hogs.map((pig, index) => (
-            <PigCard key={index} pig={pig} displayHogs/>
-        ))}     
+        <Filter handleGreased={handleGreased} sortNameWeight={sortNameWeight}/>
+        {sortedHogs.map((pig, index) => (
+            <PigCard key={index} pig={pig} />
+        ))} 
     </div>
 )
     
