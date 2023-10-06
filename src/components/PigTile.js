@@ -4,7 +4,7 @@ import Filter from "./Filter";
 
 export default function PigTile ({hogs}) {
     const [isGreased, setisGreased] = useState("All")
-    const [isSort, setIsSort] = useState("Name")	
+    const [isSort, setIsSort] = useState("Name")
 
     function handleGreased (event) {
         setisGreased(event.target.value)
@@ -36,7 +36,7 @@ export default function PigTile ({hogs}) {
     
 return (
     <div className="porkers">
-        <Filter handleGreased={handleGreased} sortNameWeight={sortNameWeight}/>
+        <Filter handleGreased={handleGreased} sortNameWeight={sortNameWeight} />
         {sortedHogs.map((pig, index) => (
             <PigCard key={index} pig={pig} />
         ))} 

@@ -11,12 +11,12 @@ export default function PigCard({ pig }) {
     return (
         <div className="pigTile" onClick={handleInfo}>
             <h3>{pig.name}</h3>
-            <img src={pig.image}></img>
+            <img width={250} src={pig.image} alt="Pig pics"></img>
         { displayInfo ? <div>
-            <p>{pig.specialty}</p>
-            <p>{pig.weight}</p>
-            <p>{pig.greased ? "Greased" : "UnGreased"}</p>
-            <p>{pig["highest medal achieved"]}</p>
+            <p>Specialty: {pig.specialty}</p>
+            <p>Weight: {pig.weight}</p>
+            <p>Greased: {pig.greased ? "Greased" : "UnGreased"}</p>
+            <p>Highest Medal Achieved: {pig["highest medal achieved"]}</p>
         </div> : null}
         </div>
 
